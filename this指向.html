@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this指向</title>
+</head>
+<body>
+    <script>
+
+        /**
+         * this 当前所在的环境
+         * 默认指向 window
+         * 严格模式下 this 默认指向 undefined
+         */
+
+        // 严格模式
+        function fnStrict () {
+            "use strict"
+            console.log(`严格模式-${this}`)
+        }
+
+        // 非严格模式
+        function fnNoStrict () {
+            console.log(`非严格模式${this}`)
+        }
+
+        fnStrict()
+        fnNoStrict()
+
+
+        let obj1 = {
+            name: '来自调用者',
+            fn: function () {
+                console.log(`当前this->${this.name}`)
+            }
+        }
+
+        // 当函数被最为对象调用是，谁调用它，this就指向谁
+        obj1.fn()
+
+        let name = 'window'
+        function fn2() {
+            console.log(`当前this->${this.name}`)
+        }
+
+        // 当函数自运行时，this指向window
+        fn2()
+
+        /**
+        * 隐士绑定this
+        **/
+        function fn3 () {
+            console.log(this.name)
+        }
+        let obj3 = {
+            name: '张三',
+            fn: fn3,
+            bar: {
+                name: '李四',
+                fn: fn3
+            }
+        }
+
+        // 当函数被最为对象（方法）调用是，谁知它的直接调用者，this就指向它
+        obj3.fn()  // 张三
+        obj3.bar.fn() // 李四
+
+        /**
+         * 隐士丢失 没有调用者 从而绑定默认绑定window
+         **/
+        function fn4 () {
+            console.log(this)
+        }
+
+        let obj4 = {
+            name: '张三',
+            bar: fn4
+        }
+
+        let obj4Fn = obj4.bar
+
+        obj4Fn() // window
+        // obj4Fn == obj4.bar 当obj4Fn执行时，相当于直接执行fn4
+
+        /**
+         * 参数传递
+         **/
+        function fn5 () {
+            console.log(this)
+        }
+        function fn5Dome (fn) {
+            fn()
+        }
+        let obj5 = {
+            name: '张三',
+            bar: fn5
+        }
+
+        obj5.bar()     // obj5
+        fn5Dome(obj5.bar) // window
+        // fn5Dome执行时，obj5.bar当作参数赋值给fn, fn是单独的, 和obj5没有关系，fn执行时，this指向window
+
+        // 等价于
+        fn5Dome (function () {
+            // 这里的this 默认是window
+            console.log(this)
+        })
+
+        // setTimeout setInterval this默认指向window
+        // setTimeout(function () {
+        //     console.log(this)
+        // }, 1000)
+
+        let obj6 = {
+            name: '1',
+            fn: function () {
+                console.log(this)
+            }
+        }
+        // setTimeout(obj6.fn, 1000)
+
+
+        /**
+         * 间接调用
+         **/
+
+        function fn7 () {
+            console.log(this)
+        }
+
+        let obj7 = {
+            name: 'obj7',
+            fn: fn7
+        }
+
+        let obj7Dome = {
+            name: 'obj7Dome',
+        }
+        obj7.fn(); // obj7
+        (obj7Dome.bar = obj7.fn)(); // window
+        // obj7Dome.bar 等价于 fn7  obj7Dome 立即执行函数 当运行时，相当于 执行 fn7， fn7 this默认指向window
+
+        obj7Dome.p = obj7.fn;
+        obj7Dome.p(); // obj7Dome
+        //obj7Dome.p 执行时 是 obj7Dome调用 方法，所以是obj7Dome
+
+        // 显示绑定 手动修改this
+        // call apply bind
+        function fn8 () {
+            console.log(this)
+        }
+        let obj8 = {
+            name: 'obj8'
+        }
+        fn8.apply(obj8) // obj8
+        fn8.call(obj8)  // obj8
+
+        let fn8Bind = fn8.bind(obj8)
+        fn8Bind() // obj8
+
+        // 制定绑定this 并且不可习修改
+        function fn9 () {
+            console.log(this)
+        }
+
+        let obj9 = {
+            name: 'obj9'
+        }
+
+        function bindFn9 () {
+            fn9.call(obj9)
+        }
+        bindFn9(); // obj9
+        bindFn9.call(window) // obj9
+        // 当运行 bindFn9 时， 函数内部会指向 fn9.call(obj9) 绑定对象obj9 无论在外包怎么修改 都无法在更高this
+
+
+        /**
+         * new 的this指向
+         **/
+        function fn10 () {
+            return {
+                name: 'fn10'
+            }
+        }
+        let fnDome1 = new fn10();
+        console.log(fnDome1); // {name: 'fn10'}
+        // 当有关键词 new时，并且其中有return 那么this指向 return的结果，若没有return，this指向当前实力话对象
+        function fn11 () {}
+        let fnDome2 = new fn11();
+        console.log(fnDome2); // fnDome2
+
+    </script>
+</body>
+</html>

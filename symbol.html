@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbol</title>
+</head>
+<body>
+<script>
+    // symbol 的值是唯一的
+    // 并且 symbol 可以作为对象的属性标示符
+    let a = Symbol()
+    let b = Symbol()
+    console.log(a === b) // false
+
+    let k = {
+        [Symbol()]: {name: '1'},
+        [Symbol()]: {name: '12'}
+    }
+    console.log(k)
+
+</script>
+</body>
+</html>

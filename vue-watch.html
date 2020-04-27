@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-watch原理</title>
+</head>
+<body>
+<script>
+    /**
+     * 在实例话 watch的时候，会创建一个watcher对象，
+     * watcher会接受监听的key,回调方法，配置项目
+     * watcher会更根据传入的key，来获取数据，并且保存，这样就会监听数据的get方法捕获，加入依赖中。
+     * 当修改监听数据时，就会出发set，这样就能通知watch。
+     * 深度监听就是，获取监听的是一个对象，就会去遍历获取这个对象下所有的属性的值，这样就能被加入依赖，当修改时可以被通知
+     */
+</script>
+</body>
+</html>

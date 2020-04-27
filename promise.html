@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+<script>
+    // console.log(Promise)
+    // let fn = function () {
+    //     return new Promise(function (resolve) {
+    //         resolve('success')
+    //     })
+    // }
+    // fn().then(data => {
+    //     console.log(data)
+    // })
+
+    // 解决异步回掉问题
+    function red() {
+        console.log('red');
+    }
+    function green() {
+        console.log('green');
+    }
+    function yellow() {
+        console.log('yellow');
+    }
+
+    var light = function (timmer, cb) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log(timmer)
+                cb();
+                reject();
+                // resolve()
+            }, timmer);
+        });
+    };
+
+    var step = function () {
+        console.log('运行')
+        Promise.resolve().then(function () {
+            return light(3000, red);
+        }).then(function () {
+            return light(2000, green);
+        }).then(function () {
+            console.log('到这里了')
+            return light(1000, yellow);
+        }).then(function () {
+            console.log('重新运行')
+            step();
+        }).catch(data =>{
+            console.log(new Error('error'))
+        })
+    }
+
+    // step();
+    /*Promise.resolve(1).then(data => {
+        console.log(data)
+        // return 2
+        return new Promise(function (resolve, reject) {
+            // reject('2')
+            resolve(1)
+        })
+    }).then(data => {
+        console.log('不会执行')
+        console.log(data)
+    }).catch(data => {
+        console.log(data)
+    })*/
+    // console.log(Promise.prototype)
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒模型</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .content{
+            width:200px;
+            height:200px;
+            background:#ccff00;
+            padding:20px;
+            box-sizing:content-box;
+        }
+        .border{
+            width:200px;
+            height:200px;
+            background:#f00;
+            padding:20px;
+            box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="content">我是标准</div>
+    <div class="border">我是怪异</div>
+</div>
+<script>
+    /**
+     * 什么是盒模型
+     * 任何元素都可以看作一个盒子 （一个思维模式）
+     * 组成部分：
+     * content 内容区域
+     * padding 填充
+     * border 描边
+     * margin 空白边
+     * 如何切换盒模型
+     * box-sizing content-box 标准盒模型
+     * box-sizing border-box 怪异盒模型
+     *
+     * 区别：
+     *  标准盒模型：content = width + border + padding
+     *  怪异盒模型： content = width (包含borer, padding)
+     */
+</script>
+</body>
+</html>

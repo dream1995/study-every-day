@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+<script>
+    let b = {
+        name: 'b',
+        fn: () => {
+            console.log(this)
+        },
+        bar: function () {
+            console.log(this)
+        },
+        call: function () {
+            (() => {
+                console.log(this)
+            })()
+        }
+    }
+    b.fn() // window
+    b.bar() // b
+    b.call() // b
+    // 箭头函数中没有this绑定
+
+
+    function fnc() {
+        console.log(arguments)
+    }
+    let fnd = () => {
+        // console.log(arguments)
+    }
+    let fne = (...arg) => {
+        console.log(arg)
+    }
+
+    fnc(1,2) //
+    fnd(1,2) // arguments is not defined
+    fne(1,2) // arguments is not defined
+
+    //箭头函数特点
+    // 1 箭头函数中不存在this, 它的this 继承上下文中的this
+    // 2 箭头函数中没有 arguments
+
+</script>
+</body>
+</html>

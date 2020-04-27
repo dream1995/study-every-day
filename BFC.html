@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BFC</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box1{
+            background:red;
+            margin-top:30px;
+        }
+        .childre-box{
+            height:100px;
+            margin-top:20px;
+            background: #ccff00;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="box1">
+        <div class="childre-box"></div>
+    </div>
+</div>
+<script>
+    /**
+     * 什么是BFC
+     * 块级格式化上下文，BFC元素不会影响外部元素
+     *
+     *  1. BFC元素垂直方向编剧会发生重叠
+     *  2. 具备BFC元素不会和浮动元素相互重叠，
+     *  3. BFC在页面中是一个独立容器，外面的元素不会印象里面的元素，里面的元素不会影响外面的元素
+     *  4. 计算BFC元素高度时，浮动元素也包含其中。
+     *
+     *  创建规则：
+     *  1. overflow不是visible
+     *  2. float 不为none
+     *  3. position 不为relative/static
+     *  4. display inline-block /table-cell
+     *
+     *  边距渲染规则：
+     *  父与子：margin-top/margin-bottom重叠是，取最大值
+     *  兄弟之间：
+     */
+</script>
+</body>
+</html>

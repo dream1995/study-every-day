@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据类型</title>
+</head>
+<body>
+<script>
+    /**
+     * 数据类型
+     * 基本数据类型 String Number null undefined Boolean Symbol
+     * 复杂数据类型 Object Array Function
+     **/
+
+    /**
+     * let 和 var 区别
+     * let 只在声明的代码块有效
+     * 不存在变了提升
+     * 全局作用域和函数作用域
+     * ES6新增块级作用域
+     */
+    function fn1 () {
+        let name = 'Hello word'
+        console.log(name)
+    }
+    fn1()
+    console.log(name)
+
+    console.log(ageName)
+    // console.log(age)
+    var ageName = '来自var'
+    let age = 12
+
+    {
+        let a1 = 1
+        var a2 = 2
+    }
+    // console.log(a2)
+    // console.log(a1)
+    // {
+    //     let a26 = 1;
+    //     let a26 = 3;
+    // }
+    // console.log(a26)
+
+    function fn6() {
+        var name1 = 'javaScript'
+        var name1 = 'javaScript'
+        // let name1 = 'javaScript'
+        // let name1 = 'javaScript'
+    }
+    fn6()
+
+    function fn7() {
+        if (true) {
+            let name7 = 'javaScript'
+        }
+        console.log(name7)
+    }
+    // fn7()
+
+    console.log(fn8)
+    /**
+     * 函数声明会置顶
+     * 变量声明也会置顶
+     * 函数声明比变量声明更置顶（函数在变量前面）
+     * 变量和复制一起写时，在JS引擎解析时，会将其拆分声明和赋值两部分，声明置顶。复制保留在来的为之
+     * 声明过的变量不会重复声明
+     */
+    var fn8 = '123'
+    function fn8() {
+        console.log('hello word')
+    }
+    console.log(fn8)
+
+    //等价于
+    function fn8 () {
+        console.log('hello word')
+    }
+    fn8 = 123
+    // 预编译，变量提升/函数提升 因为函数在变量上面，并且不会重复声明 所以 fn8 = function fn8 () {}
+    // 执行阶段 fn8 被赋值 所以 fn8 = 123
+
+    /**
+    * 块级作用，外层作用域不会影响内层作用域
+    **/
+</script>
+</body>
+</html>
