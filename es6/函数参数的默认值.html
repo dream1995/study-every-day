@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>函数参数的默认值</title>
 </head>
 <body>
-$END$
+<script>
+
+    function dome(x = 1) {
+        console.log(x)
+    }
+    dome()
+
+    function dome1 ({x, y}) {
+        console.log(x, y)
+    }
+
+    dome1({x: 1, y: 2})
+
+    function dome3 ({x, y} = {}) {
+        console.log(x, y)
+    }
+
+    dome3({x:2, y:3})
+
+
+    function dome4 (url, {x, y = 'Guan'} = {}) {
+        console.log(x, y)
+    }
+    dome4('https')
+
+    function dome5 (url, {x, y = 'Guan'}) {
+        console.log(x, y)
+    }
+    //dome5('https') Cannot destructure property 'x' of 'undefined' as it is undefined.
+
+    /**
+     * 参数如果默认解构赋值 则参数可以省略
+     */
+</script>
 </body>
 </html>
