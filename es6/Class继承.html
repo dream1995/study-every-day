@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Class 继承</title>
+</head>
+<body>
+
+<script>
+
+    class Guan{
+        constructor() {
+
+        }
+
+        toString() {
+            return 'Hello word'
+        }
+    }
+
+    class GuanChildren extends Guan{
+        constructor() {
+            super();
+        }
+
+        toNumber() {
+            return `children-${super.toString()}`
+        }
+    }
+
+    let dome = new GuanChildren()
+    console.log(dome.toNumber())
+
+    /**
+     * super 关键词 调用父类方法
+     * 1. 子类必须在 constructor 调用 super()
+     * 2. this 必须在 super 调用之后使用
+     * 3. 子类不会继承父类上实例属性或方法
+     */
+
+</script>
+
+</body>
+</html>

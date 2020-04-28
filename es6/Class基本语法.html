@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class 基本语法</title>
+</head>
+<body>
+
+<script>
+
+    class Guan{
+        constructor(x, y) {
+            this.x = x
+            this.y = y
+            this.toNumber = () => {}
+        }
+
+        toString() {
+            return `(${this.x}-${this.y})`
+        }
+
+    }
+
+    let dome = new Guan()
+    /**
+     * class 就是语法糖
+     * 1. 一个类必须有 constructor方法 如果没有 会默认添加空的 constructor
+     * 2. 类的属性名，可以采用表达式 [methodsName]
+     * 3. 类内部默认严格模式
+     * 4. 类不存在变量提升
+     * 5. 注意 this 指向
+     * 类的方法 实际就是在原型上的方法
+     *      上上面类Guan 等同于
+     *      function Guan () {}
+     *
+     *      Guan.prototype = {
+     *          toString () {}
+     *      }
+     *
+     **/
+    console.log(Guan.prototype.constructor == Guan) // true
+
+    let dome2 = new Guan('dome2', '26')
+
+    console.log(dome2.toString()) // dome2-26
+
+    // hasOwnProperty 判断对象是否包在自身 即 this (非继承)属性
+    console.log(dome2.hasOwnProperty('x')) // true x 定义在 this 上
+    console.log(dome2.hasOwnProperty('y')) // toString y 定义在 this 上
+    console.log(dome2.hasOwnProperty('toString'))  // false 方法 toString 定义在类 Guan上 不在this上
+    console.log(dome2.__proto__.hasOwnProperty('toString'))  // true dome2 __proto__原型对象 就是 类型Guan
+    console.log(dome2.hasOwnProperty('toNumber'))  // true toNumber 定义在 this下
+
+
+    /**
+     * 取值（get） 存值（set)
+     **/
+
+    class GuanDome{
+        constructor() {}
+
+        get name() {
+            return 'name 被获取'
+        }
+
+        set name(value) {
+            console.log('name 被重新赋值')
+        }
+    }
+
+    let dome3 = new GuanDome()
+
+    dome3.name = 'Guan'
+    console.log(dome3.name)
+
+
+    class GuanDome2{
+        constructor() {}
+
+        static myName () {}
+    }
+
+    let dome4 = new GuanDome2()
+    // dome4.myName()   dome4.myName is not a function
+
+    /**
+     * static 静态方法
+     * 1. 表明该方法不会被继承 实力对象不会拥有 该方法 类可以直接调用静态方法
+     * 2. 静态方法中的 this 指向 类
+     * 3. 父类的静态方法 子类可以继承
+     */
+
+    class GuanDome4{
+        _name = 'Guan'
+        get value() {
+            return this._name
+        }
+        set value(val) {
+            this._name = val
+        }
+    }
+
+    let dome5 = new GuanDome4()
+    dome5.value = 'Hellow GUan'
+    console.log(dome5.value)
+
+    /**
+     * 实例属性 可以写在类内部的最顶层 省略 this
+     **/
+
+</script>
+
+</body>
+</html>
