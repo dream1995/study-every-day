@@ -8,8 +8,86 @@
 <script>
 
     /**
-     * __proto__
+     * JavaScript 只有一种结构：对象
+     * 每个实例对象都有一个私有属性（__proto__),  指向它的构造函数的原型对象（prototype）。
+     * 原型对象也有一个自己的私有属性（__proto__）,层层往上直到一个对象的原型为null。null没有原型，作为这个原型链的最后一个环节。
+     * __proto__ constructor 对象和构造函数都拥有这两个属性
+     * prototype 只有函数拥有
+     *
      */
+    function FnDome1 () {}
+
+    let dome1 = new FnDome1()
+
+    console.log(dome1.__proto__ == FnDome1.prototype)
+
+    /**
+     * __proto__ 指向它的构造函数的原型（prototype）
+     */
+    console.log(dome1.__proto__ == FnDome1.prototype) // true
+
+    function FnDome2 () {
+        this.name = 'Guan'
+        this.age = 25
+    }
+
+    let dome2 = new FnDome2()
+    FnDome2.prototype.sex = '男'
+
+    console.log(dome2.sex) // 实例 dome2中没有sex, 去找dome2的原型对象 FnDom2中有sex 返回 男
+    /**
+     * 原型链
+     * dome2.__proto__ -> FnDom2.prototype -> object.prototype -> null
+     */
+    console.log(dome2.__proto__.__proto__.__proto)
+
+    /**
+     * 所有的函数都有一个私有对象 prototype
+     * 通过prototype 所有实例可以共享属性和方法
+     **/
+
+    function FnDome3 () {}
+
+    FnDome3.prototype.name = 'Guan'
+
+    console.log(FnDome3.prototype)
+
+    let dome4 = {
+        name: 'Guan'
+    }
+
+    // Object.create 创建一个新对象，并且新对象的原型为 Object.create的参数
+    let dome5 = Object.create(dome4)
+
+    dome5.age = 25
+    console.log(dome5.name) // Guan
+    /**
+     * 默认清空下，查找属性会遍历原型链，对性能有所影响。
+     * hasOwnProperty 检查对象是否具有自己定义的属性
+    **/
+    console.log(dome5.hasOwnProperty('age'))    // true
+    console.log(dome5.hasOwnProperty('name'))   // false
+
+    /**
+     * constructor 对象才有 （函数是函数，也看可以看作一个对象）
+     * constructor 指向 该对象的构造函数
+     * 和 prototype 的区别：
+     *      prototype 指向构造函数的原型对象
+     *      constructor 指向对象的构造函数
+     **/
+    function dome6 () {}
+
+    console.log(dome6.constructor === Function)
+
+    console.log(dome6.constructor == Object.constructor)
+    console.log(Object.__proto__.__proto__ == dome6.prototype.__proto__)
+    /**
+     * Object.prototype  Object的prototype 就是Object构造函的原型对象  也就是Object
+     *
+     * dome6.prototype.__proto__
+     * dome6.prototype 函数dome6的prototype 就是函数的原型对象 也就是 function
+     * dome6.prototype.__proto__ 就是 function 的原型对象 就是Object
+     **/
 
 </script>
 </body>
