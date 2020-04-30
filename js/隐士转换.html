@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隐士转换</title>
+</head>
+<body>
+<script>
+    /**
+     *  两边数据类型不一样时，编译器自动把两边数据做数据类型的转换
+     **/
+
+    console.log('1' + 1) // 11
+    console.log('1' - 1) // 0
+    /**
+    *   Sting 类型转换
+     *   当 String 和 Number 操作
+     *   + 做字符串拼接
+     *   - 做数学减法运算
+    **/
+
+    console.log('1' + 'true') // 1true
+    console.log(1 + true)   // 2
+    console.log(1 + undefined)  // NaN
+    console.log(1 + null)   // 1
+
+    /**
+     *  关系运算 转为数字
+     *  字符串 按 unicode 编码 转成数字
+     **/
+    console.log('2' > 10) // false
+    console.log('2' > '10') // false
+    console.log('abc' > 'b')    // false
+    console.log('abc' > 'add') // false
+    console.log(NaN == NaN) // false
+    console.log(undefined == null) // true
+
+    /**
+     *  复杂类型 （Array/Object）
+     *  1. 先valueOf()获取原始值，用toString(）转字符串，
+     *  2. 在把String转成Number
+     **/
+
+    console.log([1, 2] == '1,2') // true
+    // 解析过程
+    console.log([1, 2].valueOf().toString() == '1,2')
+
+    let objectDome = {}
+    console.log(objectDome == '[object Object]') // true
+    // 解析过程
+    console.log(objectDome.valueOf().toString())
+
+    let dome2 = {
+        a: 1,
+        valueOf: function () {
+            return this.a  = this.a +2
+        }
+    }
+    if (dome2 == 3 && dome2 == 5 && dome2 == 7) {
+        console.log(1)
+    }
+
+    /**
+     * 逻辑非 高于 关系运算符
+     * 逻辑非： 数据类型转换成 布尔 Boolean
+     * 最后都换转成Number 比较
+     **/
+    console.log('------------分割线------------')
+    console.log([] == 0) // true
+    // 解析过程
+    console.log([].valueOf().toString() == '')
+
+    console.log(![] == 0) // true
+    // 解析过程
+    //  逻辑非 高于关系 运算符
+    // 1. 空数组转为布尔 = true
+    // 2. !true = false
+    // 3. Number(false) == Number(0)
+
+    console.log([] == []) // false
+    // 引用类型的数据存在 堆中  栈中是地址 两个数组的地址不一样
+
+    // 相反的例子
+    let dome8 = []
+    let dome9 = dome8
+    dome8.push(1)
+    console.log(dome8 == dome9) // true
+
+    console.log([] == ![]) // true
+    // 逻辑非 高于关系
+    // 解析过程
+    // 1. [] = [].valueOf().toString() = ''
+    // 2. ![] = false
+    // 3. '' == false
+
+</script>
+</body>
+</html>
