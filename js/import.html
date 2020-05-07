@@ -7,26 +7,26 @@
 <body>
 <script type="module">
     /**
-     * import 获取其他模块提供的功能
+     * importDome 获取其他模块提供的功能
      * export 对外的接口
      */
-    import name from '../export/tools.js'
+    import name from '../export/export.mjs'
     console.log(name)
 
     /**
-     * import 是ES6语法标准
+     * importDome 是ES6语法标准
      * require 是AMD规范
      *
      * 调用时间：
      *  import是编译时调用
      *  require 是运行调用，可以在任何地方使用
      *  用法
-     import fs from 'fs'
-     import {default as fs} from 'fs'
-     import * as fs from 'fs'
-     import {readFile} from 'fs'
-     import {readFile as read} from 'fs'
-     import fs, {readFile} from 'fs'
+     importDome fs from 'fs'
+     importDome {default as fs} from 'fs'
+     importDome * as fs from 'fs'
+     importDome {readFile} from 'fs'
+     importDome {readFile as read} from 'fs'
+     importDome fs, {readFile} from 'fs'
 
      export default fs
      export const fs
