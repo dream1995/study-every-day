@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        html,body{
+            overflow: hidden;
+        }
+        .dome-box{
+            width:600px;
+            height: 600px;
+            margin: 0 auto;
+            background-image:linear-gradient(0deg,#e5e5e5 .7px,transparent 0),linear-gradient(180deg,#e5e5e5 .7px,transparent 0),linear-gradient(270deg,#e5e5e5 .7px,transparent 0),linear-gradient(90deg,#e5e5e5 .7px,transparent 0);
+            background-color:#f2f2f2;
+            background-size:50% 50%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: baseline;
+        }
+        .control{
+            width:600px;
+            height: 60px;
+            overflow: hidden;
+            margin:0 auto;
+            background: #999;
+            display: flex;
+            justify-content: flex-end;
+            color:#fff;
+            line-height:60px;
+            padding:0 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
+        }
+        .control span{
+            display: block;
+            padding: 0 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .dome-video{
+            width:50%;
+            height:50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dome-box" id="domeBox">
+<!--        <div class="dome-video" style="background:black;"></div>-->
+<!--        <div class="dome-video" style="background:burlywood;"></div>-->
+<!--        <div class="dome-video" style="background: aquamarine;"></div>-->
+<!--        <div class="dome-video" style="background: chocolate;"></div>-->
+        <video class="dome-video" controls src="https://vdept.bdstatic.com/3569457158577a493156365437595166/6d54775477757667/767c2f0d62a66472c1498a974232a7e5e275769c558f8d5d867532319c08c27fe1eda82e269d911c620a4bf749df70b4.mp4?auth_key=1589792150-0-0-4cdfacda0019911d8514991a88b0380b"></video>
+        <video class="dome-video" controls src="https://vdept.bdstatic.com/3569457158577a493156365437595166/6d54775477757667/767c2f0d62a66472c1498a974232a7e5e275769c558f8d5d867532319c08c27fe1eda82e269d911c620a4bf749df70b4.mp4?auth_key=1589792150-0-0-4cdfacda0019911d8514991a88b0380b"></video>
+        <video class="dome-video" controls src="https://vdept.bdstatic.com/3569457158577a493156365437595166/6d54775477757667/767c2f0d62a66472c1498a974232a7e5e275769c558f8d5d867532319c08c27fe1eda82e269d911c620a4bf749df70b4.mp4?auth_key=1589792150-0-0-4cdfacda0019911d8514991a88b0380b"></video>
+        <video class="dome-video" controls src="https://vdept.bdstatic.com/3569457158577a493156365437595166/6d54775477757667/767c2f0d62a66472c1498a974232a7e5e275769c558f8d5d867532319c08c27fe1eda82e269d911c620a4bf749df70b4.mp4?auth_key=1589792150-0-0-4cdfacda0019911d8514991a88b0380b"></video>
+    </div>
+
+    <div class="control" id="controlBtn">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>全屏</span>
+    </div>
+
+    <script>
+
+        let controlGroup = document.getElementById('controlBtn').querySelectorAll('span')
+        let vieoGroup = document.getElementsByClassName('dome-video')
+        controlGroup.forEach((v, index) => {
+          controlGroup[index].index = index
+        })
+        console.log(controlGroup)
+
+        document.getElementById('controlBtn').onclick = function (e) {
+          let classConfig = ['100% 100%', '50% 50%', '33.333333% 33.333333%']
+          if (e.target.index == 3) {
+            document.getElementById('domeBox').requestFullscreen()
+          } else {
+            document.getElementById('domeBox').style.backgroundSize = classConfig[e.target.index]
+            for(let i=0; i<vieoGroup.length; i++) {
+              console.log(classConfig[e.target.index].split(',')[0])
+              vieoGroup[i].style.width = classConfig[e.target.index].split(' ')[0]
+              vieoGroup[i].style.height = classConfig[e.target.index].split(' ')[0]
+            }
+          }
+        }
+
+    </script>
+</body>
+</html>
